@@ -2,13 +2,13 @@
 const supertest = require('supertest')
 const serve = require('koa-static')
 const path = require('path')
-const Koa = require('koa')
+const Logoran = require('logoran')
 
 const mount = require('..')
 
 const root = path.resolve(__dirname, '..')
 
-const app = new Koa()
+const app = new Logoran()
 
 app.use(mount('/examples', serve(path.resolve(root, 'examples'))))
 app.use(mount('/test', serve(path.resolve(root, 'test'))))

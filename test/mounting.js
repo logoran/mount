@@ -3,13 +3,13 @@
 
 var request = require('supertest')
 var mount = require('..')
-var Koa = require('koa')
+var Logoran = require('logoran')
 require('should')
 
 describe('mount(app)', function () {
   it('should mount at /', function (done) {
-    var a = new Koa()
-    var b = new Koa()
+    var a = new Logoran()
+    var b = new Logoran()
 
     a.use(async function (ctx, next) {
       await next()
@@ -21,7 +21,7 @@ describe('mount(app)', function () {
       if (ctx.path === '/world') ctx.body = 'World'
     })
 
-    var app = new Koa()
+    var app = new Logoran()
     app.use(mount(a))
     app.use(mount(b))
 
@@ -47,9 +47,9 @@ describe('mount(app)', function () {
 
 describe('mount(path, app)', function () {
   it('should mount the app at the given path', function (done) {
-    var app = new Koa()
-    var a = new Koa()
-    var b = new Koa()
+    var app = new Logoran()
+    var a = new Logoran()
+    var b = new Logoran()
 
     a.use(async function (ctx, next) {
       await next()
@@ -84,10 +84,10 @@ describe('mount(path, app)', function () {
   })
 
   it('should cascade properly', function (done) {
-    var app = new Koa()
-    var a = new Koa()
-    var b = new Koa()
-    var c = new Koa()
+    var app = new Logoran()
+    var a = new Logoran()
+    var b = new Logoran()
+    var c = new Logoran()
 
     a.use(async function (ctx, next) {
       await next()
@@ -135,10 +135,10 @@ describe('mount(path, app)', function () {
   })
 
   it('should restore prefix for mounted apps', function (done) {
-    var app = new Koa()
-    var a = new Koa()
-    var b = new Koa()
-    var c = new Koa()
+    var app = new Logoran()
+    var a = new Logoran()
+    var b = new Logoran()
+    var c = new Logoran()
 
     a.use(async function (ctx, next) {
       ctx.body = 'foo'
@@ -165,7 +165,7 @@ describe('mount(path, app)', function () {
   })
 
   it('should restore prefix for mounted middleware', function (done) {
-    var app = new Koa()
+    var app = new Logoran()
 
     app.use(mount('/foo', async function (ctx, next) {
       ctx.body = 'foo'
@@ -188,8 +188,8 @@ describe('mount(path, app)', function () {
   })
 
   it('should have the correct path', function (done) {
-    var app = new Koa()
-    var a = new Koa()
+    var app = new Logoran()
+    var a = new Logoran()
 
     a.use(async function (ctx, next) {
       ctx.path.should.equal('/')
@@ -212,8 +212,8 @@ describe('mount(path, app)', function () {
 
   describe('when errors occur', function () {
     it('should have the correct path', function (done) {
-      var app = new Koa()
-      var a = new Koa()
+      var app = new Logoran()
+      var a = new Logoran()
 
       a.use(async function (ctx, next) {
         ctx.path.should.equal('/')
@@ -249,7 +249,7 @@ describe('mount(path, app)', function () {
         ctx.body = 'World'
       }
 
-      var app = new Koa()
+      var app = new Logoran()
 
       app.use(mount('/hello', hello))
       app.use(mount('/world', world))
@@ -269,7 +269,7 @@ describe('mount(path, app)', function () {
 })
 
 describe('mount(/prefix)', function () {
-  var app = new Koa()
+  var app = new Logoran()
 
   app.use(mount('/prefix', function (ctx) {
     ctx.status = 204
@@ -309,7 +309,7 @@ describe('mount(/prefix)', function () {
 })
 
 describe('mount(/prefix/)', function () {
-  var app = new Koa()
+  var app = new Logoran()
 
   app.use(mount('/prefix/', function (ctx) {
     ctx.status = 204
@@ -349,7 +349,7 @@ describe('mount(/prefix/)', function () {
 })
 
 describe('mount(/prefix) multiple', () => {
-  const app = new Koa()
+  const app = new Logoran()
 
   app.use(mount('/a', async (ctx) => {
     ctx.assert.equal('/a', ctx.path, 404)

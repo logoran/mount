@@ -6,11 +6,11 @@
  */
 
 const mount = require('..')
-const Koa = require('koa')
+const Logoran = require('logoran')
 
-const a = new Koa()
-const b = new Koa()
-const c = new Koa()
+const a = new Logoran()
+const b = new Logoran()
+const c = new Logoran()
 
 a.use(async function (ctx, next) {
   await next()

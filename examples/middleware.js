@@ -5,7 +5,7 @@
  */
 
 const mount = require('..')
-const Koa = require('koa')
+const Logoran = require('logoran')
 
 async function hello (ctx, next) {
   await next()
@@ -17,7 +17,7 @@ async function world (ctx, next) {
   ctx.body = 'World'
 }
 
-const app = new Koa()
+const app = new Logoran()
 
 app.use(mount('/hello', hello))
 app.use(mount('/world', world))

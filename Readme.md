@@ -1,6 +1,6 @@
-# koa-mount
+# logoran-mount
 
-  Mount other Koa applications as middleware. The `path` passed to `mount()` is stripped
+  Mount other Logoran applications as middleware. The `path` passed to `mount()` is stripped
   from the URL temporarily until the stack unwinds. This is useful for creating entire
   apps or middleware that will function correctly regardless of which path segment(s)
   they should operate on.
@@ -8,7 +8,7 @@
 ## Installation
 
 ```js
-$ npm install koa-mount
+$ npm install logoran-mount
 ```
 
 ## Examples
@@ -23,12 +23,12 @@ $ npm install koa-mount
   when mounted.
 
 ```js
-const mount = require('koa-mount');
-const Koa = require('koa');
+const mount = require('logoran-mount');
+const Logoran = require('logoran');
 
 // hello
 
-const a = new Koa();
+const a = new Logoran();
 
 a.use(async function (ctx, next){
   await next();
@@ -37,7 +37,7 @@ a.use(async function (ctx, next){
 
 // world
 
-const b = new Koa();
+const b = new Logoran();
 
 b.use(async function (ctx, next){
   await next();
@@ -46,7 +46,7 @@ b.use(async function (ctx, next){
 
 // app
 
-const app = new Koa();
+const app = new Logoran();
 
 app.use(mount('/hello', a));
 app.use(mount('/world', b));
@@ -74,8 +74,8 @@ World
   of the prefix, as they're not aware of it.
 
 ```js
-const mount = require('koa-mount');
-const Koa = require('koa');
+const mount = require('logoran-mount');
+const Logoran = require('logoran');
 
 async function hello(ctx, next){
   await next();
@@ -87,7 +87,7 @@ async function world(ctx, next){
   ctx.body = 'World';
 }
 
-const app = new Koa();
+const app = new Logoran();
 
 app.use(mount('/hello', hello));
 app.use(mount('/world', world));
@@ -108,18 +108,18 @@ app.use(mount(b));
 ## Debugging
 
   Use the __DEBUG__ environement variable to whitelist
-  koa-mount debug output:
+  logoran-mount debug output:
 
 ```
-$ DEBUG=koa-mount node myapp.js &
+$ DEBUG=logoran-mount node myapp.js &
 $ GET /foo/bar/baz
 
-  koa-mount enter /foo/bar/baz -> /bar/baz +2s
-  koa-mount enter /bar/baz -> /baz +0ms
-  koa-mount enter /baz -> / +0ms
-  koa-mount leave /baz -> / +1ms
-  koa-mount leave /bar/baz -> /baz +0ms
-  koa-mount leave /foo/bar/baz -> /bar/baz +0ms
+  logoran-mount enter /foo/bar/baz -> /bar/baz +2s
+  logoran-mount enter /bar/baz -> /baz +0ms
+  logoran-mount enter /baz -> / +0ms
+  logoran-mount leave /baz -> / +1ms
+  logoran-mount leave /bar/baz -> /baz +0ms
+  logoran-mount leave /foo/bar/baz -> /bar/baz +0ms
 ```
 
 ## License

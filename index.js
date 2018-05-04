@@ -3,8 +3,8 @@
  * Module dependencies.
  */
 
-const debug = require('debug')('koa-mount')
-const compose = require('koa-compose')
+const debug = require('debug')('logoran-mount')
+const compose = require('logoran-compose')
 const assert = require('assert')
 
 /**
@@ -15,7 +15,7 @@ module.exports = mount
 
 /**
  * Mount `app` with `prefix`, `app`
- * may be a Koa application or
+ * may be a Logoran application or
  * middleware function.
  *
  * @param {String|Application|Function} prefix, app, or function

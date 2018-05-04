@@ -9,11 +9,11 @@
  */
 
 const mount = require('..')
-const Koa = require('koa')
+const Logoran = require('logoran')
 
 // hello
 
-const a = new Koa()
+const a = new Logoran()
 
 a.use(async function (ctx, next) {
   await next()
@@ -22,7 +22,7 @@ a.use(async function (ctx, next) {
 
 // world
 
-const b = new Koa()
+const b = new Logoran()
 
 b.use(async function (ctx, next) {
   await next()
@@ -31,7 +31,7 @@ b.use(async function (ctx, next) {
 
 // app
 
-const app = new Koa()
+const app = new Logoran()
 
 app.use(mount('/hello', a))
 app.use(mount('/world', b))
